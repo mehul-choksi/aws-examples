@@ -1,0 +1,47 @@
+AWS CDK Multiprogramming language framework
+Develops cloud infra as reusable components
+Cloud abstraction - constructs
+Language JS, Python, Java .net
+
+CDK - tree like app, root 
+
+CDK cli - builds CloudFormation templates using CDK
+
+3 main components:
+	Core framework - Construct programming model, stacks
+	AWS Construct library: Allow you to interact with aws services using oop constructs
+	AWS CDK CLI - Transform cdk to cfn
+
+Commands
+
+cdk init 
+
+cdk init --language python
+
+Python3 virtual environment virtualenv -p python3 envname
+
+
+Application description & flow:
+	Create a stack having lambda,api gateway and s3 bucket.
+	Implement a basic lambda function that reads from s3 bucket and returns the response. The lambda function sits behind the api gateway
+	
+	Api gateway -> Lambda -> S3
+
+Lambda: app_root/resources/widgets.js // Implementation of lambda that reads data from s3 bucket and returns the response
+
+WidgetService: app_root/sample_cdk/widget_service.py 
+
+// Create a lambda using aws cdk & the implementation of lambda defined above.
+// Create an api gateway using aws cdk
+// Create an api gateway lambda integration object using the lambda handler
+// Add the lambda integration object, with the http method
+
+Modify the samplecdk_service_stack to utilize the Widget Service
+
+cdk synth
+
+cdk bootstrap aws://ACCOUNT-NUMBER/REGION
+
+cdk deploy
+
+
