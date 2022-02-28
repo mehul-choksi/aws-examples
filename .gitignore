@@ -1,0 +1,4 @@
+cdk/sample-cdk/cdk.out/
+cdk/sample-cdk/.venv/
+lambda-s3/node_modules/
+lambda-s3/presigned/node_modules/

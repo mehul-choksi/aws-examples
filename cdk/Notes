@@ -1,7 +1,7 @@
 AWS CDK Multiprogramming language framework
 Develops cloud infra as reusable components
 Cloud abstraction - constructs
-Language JS, Python, Java .net
+Languages JS, Python, Java .net
 
 CDK - tree like app, root 
 

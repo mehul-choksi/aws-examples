@@ -1,0 +1,49 @@
+<html>
+
+	<script>
+
+		/*
+			Set up: npm i cors-anywhere
+			cd node_modules/cors-anywhere/lib
+			npm run start
+			This starts the proxy which adds the required headers to workaround cors
+			
+			Frontend for uploading api response to an s3 bucket using the presigned url
+			The presigned url is generated using a lambda which has write access to the bucket.
+			Using the presigned url's signature, an unauthorized user is able to assume the same permissions to the s3 bucket that a lambda has
+			There is an expiration time to the presigned url
+		*/
+
+		getTodos = async () => {
+			let dataUrl = 'http://jsonplaceholder.typicode.com/todos'
+			return fetch(dataUrl)
+					.then(res => res.json())
+					.then(data => data);
+		}
+		upload = async () => {
+			console.log('Attempt to upload invoked.');
+			let dataToUpload = await getTodos();
+			console.log('Data to upload ' + dataToUpload);
+
+			// To do: Dynamically get the presigned url by interfacing the lambda with the api gateway
+			const url = "http://localhost:8080/<presignedUrlFromLambda>";
+			return fetch(url, {
+				method: "PUT",
+				headers: {
+					"Content-Type" : "application/json"
+				},
+				body : dataToUpload
+			})
+			.then(response => {
+				console.log('Uploaded data successfully. Response: ' + response);
+			})
+			.catch(err => console.log('Error occured ' + err));			
+		}
+	</script>
+
+	<body>
+		<button onclick="upload()">Trigger upload</button>
+		
+	</body>
+
+</html>
